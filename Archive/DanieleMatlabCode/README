@@ -1,0 +1,68 @@
+Analysis tool for ADCP cruises
+
+
+
+ adcp_contour.m     
+                    	contours the amplitude of backscatter signal (unprocessed)
+ classify_cruise.m 
+                    	go through cruises, plots, and classify cruises through visual inspection
+                    	- a cruise is processed once it's flagged
+                    	- 1,3 flags have DVM usable data
+                    	- comments are left for cruises
+ adcp_clean_amp.m 
+                    	cleans the amplitude of a cruise, according to blanks and flags
+                    	- bad flags can be set to NaN
+                    	- blanks are subtracted (default = smallest 10 % of signal)
+ adcp_preprocess.m 
+                    	preprocesses a cruise by interpolating all depths to most common vertical grid
+ analyze_cruise.m    
+                    	analyze the average day DVM pattern of a cruise by classifying "day" and "night" times according
+                    	to sun angle elevation, then for each "day" if the day is good (no small dt, and surrounded by at least
+                    	one full night of data) produces a profile of amplitude (ampday) and a profile of day-night amplitude (ampdiff)
+                    	Output is stored in a reduced cruise structure, with days as time units
+
+ find_surrounding_indices.m 
+                    	used by analyze_cruise.m to find the surround of a elevation min/ max according to a criterion of total time width
+ adcp_dvm_depth1.m
+ adcp_dvm_depth2.m   
+                    	diagnose the DVM pattern extracted by analyze_cruise.m
+ process_dvm_single.m
+                     	for a single input cruise, applies analyze_cruise.m and saves output/prints figure etc.
+ process_dvm_all.m
+                     	for all cruises with a given flag, analyze_cruise.m and saves output/prints figure etc.
+ 
+ dvm_find_depth.m    	finds for each day the DVM depth according to specific criteria , variable and parameters
+ 
+ load_dvm_pattern.m  
+ 			load in the analyzed cruise, reduced to daily output (dvm patterns only)   
+ 
+ workflow_dvm_depth_extraction.m 
+ 			for a given indf (cruise index from 1:ncruises) loads a cruise and does the DVM-DEPTH extraction
+ workflow_dvm_depth_extraction2.m 
+ 			as above but saves out and uses specified days and depths
+ 
+ load_dvm_pattern2.m
+ 			used by workflow_dvm_depth_extraction to load a cruise given the index indf
+ 		   	usage: [cout cruise] = load_dvm_pattern2(indf);
+
+ combine_all_dvm_depth.m
+ 			loads all the DVM-DEPTH extracted data, and combine them into unique structure
+ 			usage: cout = combine_all_dvm_depth;
+ grid_dvm_dataset.m
+ 			grids the final DVM-DEPTH structure onto a specified grid
+                     	usage: gout = grid_dvm_dataset(cout)
+                     	can use lon, lat, blon, blat inputs as well, or just dx,dy grids
+                     	output contains: number, mean, std for the input variable
+ grid_dvm_dataset_time.m
+ 			As "grid_dvm_dataset.m" but breaking down by time (e.g. month, season etc.)
+ 			requires a "daybound" variable that contains the day limit for time averaging 
+                        e.g. for monthly climatologies: daybound = [1 31; 32 59; 60 90; ...];
+ save_dvm_netcdf.m
+ 			generate standard gridded dataset and saves netcdf
+ save_dvm_netcdf_time.m
+ 			generate standard gridded dataset - including time - and saves netcdf
+
+EXAMPLES TO PLOT:
+ 			figure;pcolor(gout.blon(:,1),gout.blat(:,1),gout.mean);shading flat;colorbarn;plot_coast;hold off
+ 			adcp_scatter_map(cout,'var','zdvm_bksc_mean','fig',0,'edge',0,'nan',0,'size',15);
+                 
