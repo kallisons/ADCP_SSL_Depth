@@ -1,6 +1,7 @@
 ### ADCP SSL Depth
 Analysis to determine the depth of the sound scattering layer (SSL) in the ocean from acoustic doppler current profiler (ADCP) data.  The SSL is created by high densities of zooplankton and fish.
 
+Please cite these studies if you use this code:
 
 Bianchi, D. and Mislan, K. A. S. (2016). Global patterns of diel vertical migration times and velocities from acoustic data. Limnology and Oceanography, 61:353-364.  http://dx.doi.org/10.1002/lno.10219
 
