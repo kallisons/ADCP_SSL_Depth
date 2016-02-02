@@ -1,0 +1,162 @@
+LAST CHANGED    : 2011/04/14 17:01:36
+CRUISE NAME(S)  : km1113, hot231
+CRUISE DATES    : 2011/04/10 to 2011/04/14
+SHIP NAME       : Kilo Moana
+PORTS           : Honolulu to Honolulu
+CHIEF SCIENTIST : Nosse
+DATABASE NAME   : a_km
+DATA FILES      : km2011_099_66651.raw to km2011_103_57600.raw
+
+STATUS          :  to do                           done
+                  ------                       -----------
+                  averaged                       [  X  ]
+                  loaded                         [  X  ]
+
+                        NOTE: time-dependent heading corrections staged
+                        (cal/rotate/ens_hcorr.ang)
+                        --> check if applied using "rotate"
+
+                  check heading correction       [  X  ]
+                  calibration                    [  X  ]
+                  edited                         [  X  ]
+                  re-check heading correction    [  X  ]
+                  check editing                  [  X  ]
+                  figures                        [  X  ]
+
+INSTRUMENT      : os38
+
+ACQUISITION     :
+     PROGRAM    : uhdas
+     PROCESSING:    : python
+
+LOGGING         :
+
+     PARAMETERS : BT : bottom track mode (on or off)
+                  SI : sampling interval or averaging period for ensemble (sec)
+                  NB : number of bins
+                  BL : bin length (m)
+                  TD : transducer depth (m)
+                  BK : blanking length (m)
+                  HO : heading offset applied by DAS (deg)
+                  HB : heading bias (deg)
+                  CRPH : compensation for roll-pitch-heading, 1:on, 0:off)
+
+                  yy/mm/dd  hh:mm:ss   BT   SI  NB  BL  TD BK     HO     HB CRPH
+                  2011/04/10 18:35:51  off  300 115  12   7 16  44.55   0.00 0001
+                  2011/04/11 19:35:52  off  300 115  12   7 16  44.55   0.00 0001
+
+HEADING         :
+     PRIMARY    : gyro
+     CORRECTION : posmv
+
+POSITIONS       : gps (specify more detail if available)
+
+CALIBRATION     : original heading alignment: 44.55
+                  final transducer angle is:
+                       44.55 - (-0.05) = 44.60 deg starboard of fwd
+
+                  (small) additional scale applied: 1.0055
+	              final scale factor used 1.0055
+
+COMMENTS        : no gaps in POSMV
+
+PROCESSOR       : J.Hummon, B.Grcic
+
+
+--- processing parameters ----------
+
+
+## (determined from "sonar"): model = os
+## (determined from "sonar"): frequency = 38
+## (determined from "sonar"): pingtype = bb
+## (determined from "sonar"): instname = os38
+## ping_headcorr is False
+## hcorr_inst is posmv
+           beamangle   30
+          cruisename   km1113
+           frequency   38
+            instname   os38
+               model   os
+            pingtype   bb
+         proc_engine   python
+               sonar   os38bb
+            yearbase   2011
+
+=========================
+
+(1) look at heading correction: are there gaps?
+
+figview.py cal/rotate/*png
+
+No gaps; it says everything is fine.
+
+=========================
+
+(2) check calibration -- what remains to be done?
+
+	** watertrack **   (tail -20 cal/watertrk/adcpcal.out)
+
+    Number of edited points:  26 out of  26
+        amp   = -0.0013  + 1.0059 (t - 101.6)
+        phase =   0.03  + 0.0110 (t - 101.6)
+                    median     mean      std
+        amplitude   1.0050   1.0059   0.0065
+        phase      -0.1110   0.0110   0.5654
+
+     (a) amplitude is within 0.5%  (.995 - 1.005) so "good enough" for the next step
+     (b) phase (angle) is between (-0.2, 0.2) so  "good enough" for the next step
+
+=========================
+
+(3) edit: gautoedit.py ..
+
+    from gautoedit, for every screen do
+      - show now
+	  - additional manual editing if necessary
+	  - list to disk (creates/appends new a*.asc files with new flags)
+
+=========================
+
+
+(4) apply editing:
+
+from dir os38bb:
+
+quick_adcp.py --steps2rerun apply_edit:navsteps:calib --proc_engine python --auto
+
+
+=========================
+
+(5) phase and amplitude calibration:
+
+from dir os38bb:
+
+quick_adcp.py --steps2rerun rotate:navsteps:calib:matfiles --rotate_amplitude 1.0055
+              --rotate_angle -0.05 --auto
+
+** applied corrections: **
+
+           amp=1.0055
+           phase=-0.05
+
+
+** watertrack **   (tail -20 cal/watertrk/adcpcal.out)
+
+
+    Number of edited points:  27 out of  27
+        amp   = -0.0016  + 1.0002 (t - 101.7)
+        phase =   0.02  + 0.0579 (t - 101.7)
+                    median     mean      std
+        amplitude   0.9990   1.0002   0.0063
+        phase      -0.0460   0.0579   0.5533
+
+
+=========================
+
+(6) web plots:
+
+mkdir webpy
+
+quick_web.py --cruiseid hot231_km1113 --sonar os38bb --interactive
+
+=========================

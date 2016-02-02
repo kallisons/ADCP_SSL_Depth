@@ -1,0 +1,165 @@
+ #DATA_DATES: 2011/04/10 18:35:00 --- to --- 2011/04/14 17:01:00
+ #LON_RANGE: 158.33 W --- to --- 157.87 W
+ #LAT_RANGE:  21.24 N --- to ---  23.03 N
+ #DEPTH_RANGE:     36 --- to --- 1404 m
+ #SAC_CRUISE_ID: 01540 
+ #PLATFORM_NAME: R/V Kilo Moana
+ #PRINCIPAL_INVESTIGATOR_NAME: E.Firing,J.Hummon,D.Karl,R.Lukas
+ #PI_INSTITUTION: University of Hawaii at Manoa
+ #PI_COUNTRY: USA
+ #PROJECT: Hawaii Ocean Time-series (JGOFS, WOCE (time-series), CLIVAR)
+ #CRUISE_NAME: ship_tag=KM1113:os38bb woce_tag=PRS02,HOT231 EXPOCODE=33KB231_1
+ #PORTS: Honolulu to Honolulu
+ #GEOGRAPHIC_REGION: Hawaiian Islands, North Central Pacific
+ #PROCESSED_BY: University of Hawaii at Manoa
+ #NAVIGATION: GPS
+ #QUALITY_NAV: excellent
+ #GENERAL_INFORMATION: 
+CRUISE NOTES
+  CHIEF SCIENTIST ON SHIP     : Craig Nosse
+    INSTITUTE                 : Univ. of Hawaii
+    COUNTRY                   : USA
+  SIGNIFICANT DATA GAPS       : 
+  SPECIAL SHIP TRACK PATTERNS :
+  COMMENTS                    : 
+This cruise has two instruments, 38kHz phased array ("Ocean Surveyor",
+"OS38") capable of pinging in broadband or narrowband (or interleaved) modes,
+and a 300kHz broadband "Workhorse" ADCP ("WH300"). Each instrument and pingtype
+was processed separately, producing 3 ADCP datasets for this cruise.
+These datasets OS38 broadband, OS38 narrowband, WH300, have
+NODC SAC IDs 01540, 01541, and 01542, respectively.
+
+Broadband data from an Ocean Surveyor gives greater resolution but less
+depth penetration, Narrowband mode from the same instrument gives lower
+resolution but deeper penetration.
+
+The Workhorse 300 has the highest time- and depth- resolution, but
+rarely reaches deeper than 80m.
+
+ADCP INSTRUMENTATION
+  MANUFACTURER                : RD Instruments (RDI)
+  HARDWARE MODEL              : Ocean Surveyer 38
+  SERIAL NUMBERS              :
+  FIRMWARE VERSION            :
+  TRANSMIT FREQUENCY          : 38kHz 
+  ACOUSTIC BEAM WIDTH         :
+  TRANSDUCER BEAM ANGLE       : 30 degrees
+  COMMENTS                    : broadband 
+
+ADCP INSTALLATION
+  METHOD/DESCRIPTION OF THE
+    ATTACHMENT TO THE HULL    : The 38kHz Ocean Surveyor is mounted in the 
+                                starboard hull.  The 300kHz WorkHorse is 
+                                mounted in the port hull 
+  LOCATION/DEPTH ON HULL      : nominally 7m 
+  REPEATABLE ATTACHMENT       : yes for OS38 and WH300
+  DATE OF MOST RECENT ATTACH. : OS38: installed Dec, 2003
+                                WH300: installed March, 2005
+  ACOUSTIC WINDOW             : OS38 is behind a window; 
+                                No window for the WH300
+  COMMENTS                    :
+
+ADCP INSTRUMENT CONFIGURATION: 
+  DEPTH RANGE                 : 36 to 1404 m
+  BIN LENGTH                  : 12 m
+  NUMBER OF BINS              : 115
+  TRANSMIT PULSE LENGTH       : 13 m
+  BLANKING INTERVAL           : 16 m
+  ENSEMBLE AVERAGING INTERVAL : 300 s
+  SOUND SPEED CALCULATION     : function of temp at transducer
+  BOTTOM TRACKING             : yes, from and to port
+  DIRECT COMMANDS             :
+  COMMENTS                    : Broadband mode
+
+Original heading alignment: 44.55 = h_align
+
+ADCP DATA ACQUISITION SYSTEM
+  SOFTWARE DEVELOPERS         : E.Firing, J.Hummon
+  SOFTWARE VERSIONS           : UHDAS
+  DATA LOGGER, MAKE/MODEL     :
+  ADCP/LOGGER COMMUNICATION   :
+  USER BUFFER VERSION         : none
+  CLOCK                       :
+  COMMENTS                    : single-ping data files QC'ed then averaged
+                                by UHDAS
+
+SHIP HEADING                      
+  INSTRUMENT MAKE/MODEL       : gyro compass: Raytheon STD-20
+  SYNCHRO OR STEPPER          :
+  SYNCHRO RATIO               :
+  COMPENSATION APPLIED        :
+  GPS ATTITUDE SYSTEM         : 1) Ashtech, 2) TSS, Inc. Model POS/MV 320
+    LOCATION OF ANTENNAS      :
+    RIGID ATTACHMENT          : 
+    LOGGING RATE              :
+
+ANCILLARY MEASUREMENTS            
+  SURFACE TEMP AND SALINITY   : yes
+  PITCH/ROLL MEASUREMENTS     : yes, but not applied to ADCP data
+  HYDRO CAST MEASUREMENTS     : yes
+  BIOMASS DETERMINATION       :
+    DATE OF LAST CALIBRATION  :
+    CALIBRATION COEFFICIENTS  :
+    BEAM-AVERAGED AGC AVAILABLE?: yes
+    CALIBRATION NET TOWS?     :   < NO > < YES >
+  COMMENTS                    :
+
+ADCP DATA PROCESSING/EDITING
+  PERSONNEL IN CHARGE         : J.Hummon, B.Grcic
+  DATE OF PROCESSING          : 
+  ADDED TO NODC DB            : Aug 2011
+  NOTABLE SCATTERING LAYERS   :
+  COMMENTS                    :
+
+NAVIGATION
+  GPS                         : 
+    MAKE/MODEL                : TTS, Inc. Model POS/MV 320
+    SELECTIVE AVAILABILITY    : 
+    P-CODE                    : 
+    DIFFERENTIAL              : Raytheon Raychart 420
+    SAMPLE INTERVAL           :
+    LOCATION OF ANTENNA
+      RELATIVE TO TRANSDUCER  :
+    TIME OBTAINED RELATIVE TO
+      START/END OF ENSEMBLE   : end
+    AVERAGING/EDITING APPLIED : yes
+    LOGGED WITH ADCP DATA     : YES, time stamp of ADCP and GPS use
+                                same clock.  Made available to CODAS 
+                                onboard processing. 
+    LOGGED INDEPENDENTLY      : YES 
+    COMMENTS                  :
+  OTHER                       : 
+
+CALIBRATION 
+    GYROCOMPASS CORRECTION      : yes, POSMV (no gaps)
+    BOTTOM TRACK METHOD         : yes
+    WATER TRACK METHOD          : yes
+    FINAL SELECTION             : AMPLITUDE= 1.0055  PHASE= -0.05
+                   Final transducer angle is 44.55 - (-0.05) = 44.60
+    AGREEMENT WITH PREVIOUS 
+      CRUISES                   : 
+    SOUND SPEED CORRECTIONS     : yes
+    COMMENTS                    : 
+
+NAVIGATION CALCULATION             
+    NAVIGATION USED             :  GPS
+    REFERENCE LAYER DEPTH RANGE :  bins 2 to 20
+    FILTERING METHOD FOR 
+      SMOOTHING REFERENCE LAYER 
+      VELOCITY (FORM/WIDTH)     : Blackman window function of width T ( .5 hr):
+         w(t) = 0.42 - 0.5 * cos(2 * pi *t / T) + 0.08 * cos(4 * pi * t / T).
+    FINALIZED SHIP VEL/POSITIONS 
+    STORED IN DATABASE          : yes
+    COMMENTS                    : 
+
+ GENERAL_ASSESSMENT             : 
+    ON-STATION VS. UNDERWAY     : OK
+    VECTOR, CONTOUR, STICK PLOTS: OK
+    COMMENTS                    : OK
+
+ REFERENCES (DATA REPORTS,ETC.) : 
+2007 Fujieki, L.A., F. Santiago-Mandujano, P. Lethaby,
+   R.  Lukas, and D. Karl. Hawaii Ocean Time-series Program Data
+   Report 19, 2007.  School of Ocean and Earth Science and Technology,
+   Univ. of Hawaii, Honolulu, HI, 403 pp.
+
