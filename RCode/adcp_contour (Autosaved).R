@@ -2,8 +2,6 @@ library(ncdf4)
 library(viridis)
 library(RNetCDF)
 
-
-
 Sys.setenv(TZ="UTC")
 
 setwd("~/Code/PublishedProjects/ADCP_SSL_Depth/RCode")
