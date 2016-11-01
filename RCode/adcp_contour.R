@@ -6,14 +6,14 @@ library(fields)
 
 Sys.setenv(TZ="UTC")
 
-timept=1134
-depthc=115
+timept=9986
+depthc=60
 
 setwd("~/Code/PublishedProjects/ADCP_SSL_Depth/RCode")
 source("filled.contour/filled.contour.R", chdir = TRUE)
 source("filled.contour/filled.legend.R", chdir = TRUE)
 
-nc<-nc_open("../data/01540.nc")
+nc<-nc_open("../data/os75nb.nc")
 #nc<-nc_open("../data/os75nb.nc")
 time<-nc$dim$time$vals
 depth_cell<-nc$dim$depth_cell$vals
@@ -72,9 +72,9 @@ timetable$sun_el[i]<-sun$sun_el
 }
 
 outgraph<-"~/Code/PublishedProjects/ADCP_SSL_Depth/graphs/test.ps"
-postscript(outgraph, width=8, height=5)
+#postscript(outgraph, width=8, height=5)
 
-#quartz(width=5, height=5)
+quartz(width=5, height=5)
 par(plt = c(0.17,0.75,0.70,0.95), #c(left, right, bottom, top)  
     las = 1,                      # orientation of axis labels
     cex.axis = 1,                 # size of axis annotation
@@ -101,4 +101,4 @@ par(new = "TRUE",
 
 filled.legend(x=as.numeric(rownames(amp3)), y=as.numeric(colnames(amp3)), z=amp3, color.palette=viridis)
 
-dev.off()
+#dev.off()
